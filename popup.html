@@ -1,0 +1,58 @@
+<html>
+<head>
+	<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="popup.js"></script>
+    <script type="text/javascript" src="go.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"></head>
+</head>
+<body style="width: 400px; height: 100px;">
+
+<div id='form_cont' class="container">
+
+      <form id="login_form"  method='post' class="form-signin">
+        <h2 class="form-signin-heading">Sign in</h2>
+        <label for="user" class="sr-only">Username</label>
+        <input type="text" name="user" id="user" class="form-control" placeholder="Username" required="" autofocus="">
+        <label for="psw" class="sr-only">Password</label>
+        <input type="password" name="psw" id="psw" class="form-control" placeholder="Password" required="">
+        <a id='register_link' href="#">Register</a>
+        <input class="btn btn-lg btn-primary btn-block" value="Login" type="submit">
+      </form>
+    </div>
+<div id='reg_cont' class="container">
+      <form id="register_form"  method='post' class="form-signin">
+        <h2 class="form-signin-heading">Registration</h2>
+        <label for="user" class="sr-only">Username</label>
+        <input type="text" name="reg_user" id="reg_user" class="form-control" placeholder="Username" required="" autofocus="">
+        <label for="psw" class="sr-only">Password</label>
+        <input type="password" name="reg_psw" id="reg_psw" class="form-control" placeholder="Password" required="">
+
+        <input class="btn btn-lg btn-primary btn-block" value="Register" type="submit">
+      </form>
+      <button class="btn btn-lg btn-primary btn-block" id="back">Back</button>
+    </div>
+	<div id="go_cont" class="container">
+    <label for="pin" class="">Insert Pin</label>
+        <input type="password" name="pin" id="pin" class="form-control" placeholder="Pin" required="">
+		<button class="btn btn-lg btn-primary btn-block" id="go">Go to website!</button>
+    <button class="btn btn-lg btn-primary btn-block" id="logout">Logout</button>
+    <!-- <button class="btn btn-lg btn-primary btn-block" id="registra_sito">Registra nuovo sito!</button> -->
+	</div>
+<!--<div id="reg_sito_cont" class="container">
+      <form id="reg_sito_form"  method='post' class="form-signin">
+      <label for="pin" class="">Inserisci il Pin</label>
+        <input type="password" name="pin" id="pin" class="form-control" placeholder="Pin" required="">
+    <label for="url" class="">Inserisci l'url</label>
+        <input type="text" name="url" id="url" class="form-control" placeholder="url" required="">
+    <label for="username" class="">Inserisci username</label>
+        <input type="text" name="username_sito" id="username_sito" class="form-control" placeholder="username sito" required="">
+    <label for="password" class="">Inserisci password</label>
+        <input type="password" name="password_sito" id="password_sito" class="form-control" placeholder="password sito" required="">
+		<button class="btn btn-lg btn-primary btn-block" id="salva">Salva!</button>
+	</div> -->
+  <br />
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+
+  "name": "OP",
+  "description": "OnePassword",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon" : "ic_launcher.png",
+   "default_popup": "popup.html"
+  },
+  "icons": {
+        "16": "ic_launcher.png",
+        "48": "ic_launcher.png",
+        "128": "ic_launcher.png"
+      },
+  "permissions": [
+   "storage",
+   "activeTab",
+   "cookies",
+   "webRequest",
+   "*://*/*"
+   ],
+  "background": {
+    "scripts": [
+        "lib/jquery/jquery.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+
+      "js": [
+          "lib/jquery/jquery.min.js",
+          "form_autocomplete.js",
+          "form_check.js"
+      ]
+    }
+  ]
+}
