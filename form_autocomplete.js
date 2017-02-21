@@ -20,10 +20,10 @@ $(function() {
 
 			loginData = JSON.parse(loginData);
 
-            console.log('Login data', loginData);
+      console.log('Login data', loginData);
 
 			const host = window.location.host;
-
+			//casi speciali
 			if(host.includes(SpecialWebsites.GOOGLE)) {
 				completeGoogleForm(loginData);
 			} else if(host.includes(SpecialWebsites.LINKEDIN)) {
@@ -37,7 +37,7 @@ $(function() {
 	});
 
 });
-
+//form standard
 function completeForm(loginData, preventClick) {
     var submit = null;
 
@@ -59,7 +59,7 @@ function completeForm(loginData, preventClick) {
 		submit.click();
 	}
 }
-
+// form google
 function completeGoogleForm(loginData) {
 	var submit = null;
 

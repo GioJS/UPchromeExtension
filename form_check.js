@@ -27,12 +27,12 @@ $(function(){
         }, function(result){
             let form = forms[0];
                 if(!result.websites.some(item => item.home === window.location.host)){
-                    
+
                     let pin = prompt('Do you want to save login data? Insert registration pin');
                     if(pin != null){
                         let accessData = [];
                         Array.from(form).forEach(function(input) {
-                          //testiamo il name 
+                          //testiamo il name
                             if(input.type == 'email' || input.type == 'password' || input.type == 'text') {
                              console.log('Input', input);
                                 let data = {
@@ -42,7 +42,7 @@ $(function(){
                                 }
                                 accessData.push(data);
                             }
-                            
+
                         });
 
                         let stringData = JSON.stringify(accessData)
@@ -67,7 +67,7 @@ $(function(){
                                     }
                                 },function(result){
                                     console.log(result);
-                                    
+
                                 }).fail(function(result){
                                     console.log(result.responseJSON)
                                     alert('error during registration')
@@ -77,23 +77,16 @@ $(function(){
                         }
                         );
                     }
-                    
+
                     }
-                    
+
                 }
             ).fail(function(result){
             console.log(result);
             });
         })
+      });
 
-                
-
-            
-      
-
-   
-        });
-    
     })
     }else{
     Array.from(forms).forEach(function(form) {
@@ -107,17 +100,17 @@ $(function(){
                 "Authorization": token.token
             }
         }, function(result){
-            if(window.location.host.includes("google.com") && !form.next.disabled) {
+            if(window.location.host.includes("google") && $('.hide-form.slide-in')[0] != null  ) {
+							console.log('google',$('.hide-form.slide-in'))
                 $(form).unbind('submit');
-                return;
             }
-                if(!result.websites.some(item => item.home === window.location.host)){
-                    
+            else if(!result.websites.some(item => item.home === window.location.host)){
+
                     let pin = prompt('Do you want to save login data? Insert registration pin');
                     if(pin != null){
                         let accessData = [];
                         Array.from(form).forEach(function(input) {
-                          //testiamo il name 
+                          //testiamo il name
                             if(input.type == 'email' || input.type == 'password' || input.type == 'text') {
                              console.log('Input', input);
                                 let data = {
@@ -127,7 +120,7 @@ $(function(){
                                 }
                                 accessData.push(data);
                             }
-                            
+
                         });
 
                         let stringData = JSON.stringify(accessData)
@@ -161,9 +154,9 @@ $(function(){
                         }
                         );
                     }
-                    
+
                     }
-                     
+
                 }
 
             ).fail(function(result){
@@ -171,10 +164,10 @@ $(function(){
             });
         })
 
-                
-                    $(form).unbind('submit');
-                    $(form).submit()
-            
+
+            $(form).unbind('submit');
+            $(form).submit()
+
         });
 
    });

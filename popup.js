@@ -1,61 +1,42 @@
-$(function(){
 
+$(function(){
     chrome.storage.local.get("token", function(token) {
        console.log('Token ottenuto: ', token.token)
-
+       //controllo se l'utente è loggato
         if(token.token == null){
-            console.log('noooo');
+            console.log('no login');
             $('#go_cont').hide();
             $('#form_cont').show();
             $('#reg_cont').hide();
-            //$("#register_form").hide()
-          //  $('#reg_sito_cont').hide();
             $('#logout').hide();
         }else{
-            console.log("goooooo");
+            console.log("logged");
             $('#form_cont').hide();
             $('#go_cont').show();
             $('#reg_cont').hide();
-          //  $('#reg_sito_cont').hide();
             $('#logout').show();
-            
-        }
+            }
  })
+    //torno alla pagina di login dalla pagina di registrazione
     $('#back').click(function(event){
         event.preventDefault();
         $('#go_cont').hide();
         $('#form_cont').show();
         $('#reg_cont').hide();
-        //$("#register_form").hide()
-      //  $('#reg_sito_cont').hide();
         $('#logout').hide();
     })
+    //accedo alla pagina di registrazione
     $("#register_link").click(function(event){
         event.preventDefault();
         $('#go_cont').hide();
         $('#reg_cont').show();
         $('#form_cont').hide();
-      //  $('#reg_sito_cont').hide();
-      //  $('#reg_sito_cont').show();
     });
 
-    // $("#registra_sito").click(function(event){
-    //     event.preventDefault();
-    //     $('#go_cont').hide();
-    //     $('#reg_cont').hide();
-    //     $('#form_cont').hide();
-    //   //  $('#reg_sito_cont').show();
-    // });
-    /*	$.post({
-    url: "http://10.220.243.241:3000/websites",
-    data:{id: '3', url:'www.amazon.com', psw:'ciao'}
-},function(result){
-console.log(result)
-})
-*/
+//effettuo il login
 $("#login_form").submit(function(event){
     event.preventDefault();
-    //creamo una variabile formata da due campi 'email' e 'password'
+    //creiamo una variabile formata da due campi 'email' e 'password'
     let user = {
         email: $('#user').val(),
         password: $('#psw').val()
@@ -70,27 +51,19 @@ $("#login_form").submit(function(event){
         //nel caso l'inserimento è andato a buon fine stampo il risultato sulla console
         //e faccio visualizzare la schermata d'inserimento 'pin'
         console.log('risposta',result);
-
-        // chrome.cookies.set({"url":"http://localhost","name":"token","value":result.token},function (cookie){
-        //     console.log(JSON.stringify(cookie));
-        //     console.log(chrome.extension.lastError);
-        //     console.log(chrome.runtime.lastError);
-        // });
-
+        //salvo il token
         chrome.storage.local.set({
             token: result.token
         }, function() {
             console.log('Token salvato: ', result.token)
         });
-
-       
-        //localStorage.setItem("token", result.token);
+        //schermata pin
         $('#go_cont').show();
         $('#form_cont').hide();
         $("#register_form").hide();
         $('#logout').show();
     }).fail(function(result){
-        //nel caso l'inserimento non è andato a buon fine mostra l'errore avvenuto
+        //nel caso l'inserimento del login non è andato a buon fine mostra l'errore avvenuto
         let err = result.responseJSON;
         console.log(err);
         if(err.error == 'login_failed'){
@@ -107,10 +80,10 @@ $("#login_form").submit(function(event){
 
 
 });
-
+//effettuo la registrazione
 $("#register_form").submit(function(event){
     event.preventDefault();
-    //creamo una variabile formata da due campi 'email' e 'password'
+    //creiamo una variabile formata da due campi 'email' e 'password'
     let user = {
         email: $('#reg_user').val(),
         password: $('#reg_psw').val()
@@ -125,24 +98,21 @@ $("#register_form").submit(function(event){
         //nel caso l'inserimento è andato a buon fine stampo il risultato sulla console
         //e faccio visualizzare la schermata d'inserimento 'pin'
         console.log('risposta',result);
-        //localStorage.setItem("token", result.token);
-        // chrome.cookies.set({"url":"http://localhost","name":"token","value":result.token},function (cookie){
-        //     console.log(JSON.stringify(cookie));
-        //     console.log(chrome.extension.lastError);
-        //     console.log(chrome.runtime.lastError);
-        // });
+        alert('User registered.')
+        //salvo il token
         chrome.storage.local.set({
             token: result.token
         }, function() {
             console.log('Token salvato: ', result.token)
         })
+        //schermata di pin
         $('#go_cont').show();
         $('#form_cont').hide();
         $("#register_form").hide();
         $('#logout').show();
         $('#back').hide();
     }).fail(function(result){
-        //nel caso l'inserimento non è andato a buon fine mostra l'errore avvenuto
+        //nel caso l'inserimento registrazione non è andato a buon fine mostra l'errore avvenuto
         let err = result.responseJSON;
         if(err.error == 'user_already_registered'){
             alert('User already registered.');
@@ -158,42 +128,8 @@ $("#register_form").submit(function(event){
 
 
 });
-// $('#reg_sito_form').submit(function(event){
-//     event.preventDefault();
-//     var accessData = {
-//         username: $('#username_sito').val(),
-//         password: $('#password_sito').val()
-//     }
-//     $.post({
-//         url: 'http://one-password.herokuapp.com/website/add',
-//         beforeSend: function(request){
-//             chrome.storage.local.get("token", function(token) {
-//                 request.setRequestHeader('Authorization', token.token);
-//             });
-//         },
-//         data: {
-//             home: $('#url').val(),
-//             pin: $('#pin').val()
-//         }
-//     },function(result){
-//         console.log(result);
-//
-//     }).fail(function(result){
-//         //nel caso l'inserimento non è andato a buon fine mostra l'errore avvenuto
-//         let err = result.responseJSON;
-//         if(err.error == 'website_already_registered'){
-//             alert('Sito gia\' registrato.');
-//         }
-//         else if (err.error == 'invalid_params'){
-//             alert('Campi errati');
-//         }
-//         else{
-//             alert('Errore.');
-//         }
-//         console.log('errore', result);
-//     });
-//
-// });
+
+//effettuo il logout
 $('#logout').click(function(event){
     event.preventDefault();
     //localStorage.removeItem("token");
@@ -204,5 +140,6 @@ $('#logout').click(function(event){
         }
     });
     window.location.reload();
+    //todo chiamata al server
 });
 });
