@@ -146,9 +146,12 @@ $(function(){
                                 },function(result){
                                     console.log(result);
                                 }).fail(function(result){
-                                    console.log(result.responseJSON)
-                                    alert('error during registration')
-
+                                    let error = result.responseJSON;
+																		if(error.error == 'invalid_registration_pin') {
+																				alert('Invalid registration pin')
+																		} else {
+																			alert('Error during registration')
+																		}
                                 });
                             }
                         }

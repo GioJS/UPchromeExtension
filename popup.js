@@ -130,16 +130,28 @@ $("#register_form").submit(function(event){
 });
 
 //effettuo il logout
-$('#logout').click(function(event){
-    event.preventDefault();
-    //localStorage.removeItem("token");
-    chrome.storage.local.clear(function() {
-        var error = chrome.runtime.lastError;
-        if (error) {
-            console.error(error);
-        }
+$('#logout').click(function(event) {
+  event.preventDefault();
+
+  chrome.storage.local.get("token", function(token) {
+
+    $.get({
+      url: 'https://one-password.herokuapp.com/auth/logout',
+      headers: {
+        "Authorization": token.token
+      }
+    }, function(result) {
+      chrome.storage.local.clear(function() {
+        window.location.reload();
+      });
+
+    }).fail(function(error) {
+          alert('Error during logout');
     });
-    window.location.reload();
-    //todo chiamata al server
+
+  });
+
 });
+
+
 });
