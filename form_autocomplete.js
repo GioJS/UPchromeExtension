@@ -1,6 +1,7 @@
 const SpecialWebsites = {
 	GOOGLE: "google",
-	LINKEDIN: "linkedin"
+	LINKEDIN: "linkedin",
+	DROPBOX: "dropbox"
 }
 
 //altro content script che si occupa del recupero dei dati se presenti nel background
@@ -28,7 +29,10 @@ $(function() {
 				completeGoogleForm(loginData);
 			} else if(host.includes(SpecialWebsites.LINKEDIN)) {
 				completeLinkedinForm(loginData);
-			} else {
+			} else if (host.includes(SpecialWebsites.DROPBOX)) {
+				completeForm(loginData,true);
+			}
+			else {
 				completeForm(loginData);
 			}
 
